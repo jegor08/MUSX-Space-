@@ -1,0 +1,1 @@
+Prototype only. Public spot quotes, estimated fees, bounded route search. No order placement. No depth validation, private API keys, external swaps, iPhone or cloud scanner yet. Upload all files including .github to a private GitHub repository; run Windows setup in Actions and download artifact. Windows build not tested.
