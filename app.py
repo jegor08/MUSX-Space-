@@ -54,8 +54,12 @@ def start():
     threading.Thread(target=worker,args=(selected,capital,minimum/100,fee/100,steps),daemon=True).start()
 def track():
     for item in tree.selection():
+        if item in tracked:
+            continue
         tracked.add(item)
-        vals=list(tree.item(item,"values")); vals[3]="TRACKING / "+vals[3]; tree.item(item,values=vals)
+        vals = list(tree.item(item, "values"))
+        vals[3] = "TRACKING / " + vals[3]
+        tree.item(item, values=vals)    
 def poll():
     global busy
     while not q.empty():
