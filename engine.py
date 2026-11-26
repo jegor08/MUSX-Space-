@@ -1,5 +1,5 @@
 import math
-def scan(markets,tickers,capital=1000,fee=.001,minimum=.005,steps=6,width=2500):
+def scan(markets,tickers,capital=1000,fee=.001,minimum=.005,steps=6,width=2500,cancel=lambda:False):
     graph={}
     for symbol,m in markets.items():
         if not m.get("spot") or m.get("active") is False: continue
@@ -12,8 +12,10 @@ def scan(markets,tickers,capital=1000,fee=.001,minimum=.005,steps=6,width=2500):
     frontier=[(capital,("USDT",))]
     results=[]
     for i in range(steps):
+        if cancel(): return []
         nxt=[]
         for amount,path in frontier:
+            if cancel(): return []
             for coin,rate in graph.get(path[-1],[]):
                 value=amount*rate
                 if coin=="USDT":
